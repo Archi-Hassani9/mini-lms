@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /courses
+Disallow: /admin
+Disallow: /student/dashboard
+Sitemap: https://your-domain.vercel.app/sitemap.xml
