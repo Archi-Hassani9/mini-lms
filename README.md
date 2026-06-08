@@ -486,11 +486,6 @@ vercel --prod
 3. Copy connection variables to Render environment variables:
    - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`
 
-### Cloudinary (File Storage)
-
-1. Create free account at [cloudinary.com](https://cloudinary.com)
-2. Copy Cloud Name, API Key, API Secret to production env vars
-
 ---
 
 
@@ -508,19 +503,6 @@ vercel --prod
 | CORS | django-cors-headers with allowed origins whitelist |
 | Environment Variables | python-decouple (no secrets in code) |
 | HTTPS | Enforced in production (Render + Vercel) |
-
----
-
-## 🧩 Problem Solving
-
-See detailed answers: [docs/problem_solving_answers.md](docs/problem_solving_answers.md)
-
-Quick summary:
-1. **Slow course page** → Indexing + caching + pagination + CDN
-2. **Duplicate enrollments** → DB UNIQUE constraint + serializer validation
-3. **Scaling to 5000 users** → Load balancing + Redis + CDN + DB replicas
-4. **200MB uploads** → Chunked upload + Cloudinary + MIME validation
-5. **Accidental deletion** → Soft delete + backups + admin confirmation
 
 ---
 
