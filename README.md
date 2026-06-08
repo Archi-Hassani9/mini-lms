@@ -6,6 +6,10 @@
 [![DRF](https://img.shields.io/badge/DRF-3.14-red?style=flat)](https://www.django-rest-framework.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
 
+**Live Demo:**
+- 🌐 Frontend: `https://mini-lms-navy.vercel.app/`
+- 🔧 Backend API: `https://mini-lms-backend-rizu.onrender.com`
+
 A **production-ready, full-stack Learning Management System** built as a technical assessment project. Features a modern React frontend with a Django REST API backend, MySQL database, role-based authentication, file uploads, and an AI chatbot assistant.
 
 ---
@@ -22,7 +26,6 @@ A **production-ready, full-stack Learning Management System** built as a technic
 - [API Documentation](#api-documentation)
 - [Folder Structure](#folder-structure)
 - [Deployment](#deployment)
-- [Git Workflow](#git-workflow)
 - [Security](#security)
 - [Problem Solving](#problem-solving)
 
@@ -34,15 +37,12 @@ Mini LMS enables:
 - **Admins** to manage courses, lessons, assignments, students, and submissions
 - **Students** to register, browse/enroll in courses, access lessons, and submit assignments
 
-**Live Demo:**
-- 🌐 Frontend: `https://mini-lms.vercel.app` *(deploy after setup)*
-- 🔧 Backend API: `https://mini-lms-api.onrender.com/api` *(deploy after setup)*
 
 **Test Credentials:**
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@lms.com | Admin@123 |
-| Student | john.doe@student.com | Student@123 |
+| Role    | Email                     | Password  |
+|---------|---------------------------|-----------|
+| Admin   | Admin456@lms.com          | Admin@123 |
+| Student | archihassani901@gmail.com | Archi@123 |
 
 ---
 
@@ -109,7 +109,6 @@ Mini LMS enables:
 | django-cors-headers | CORS handling |
 | mysqlclient | MySQL connector |
 | python-decouple | Environment variables |
-| Cloudinary | Production file storage |
 | Gunicorn | Production WSGI server |
 | django-filter | API filtering |
 
@@ -157,10 +156,6 @@ Mini LMS enables:
 
 ---
 
-## 🗃 ER Diagram
-
-![ER Diagram](database/er_diagram.png)
-
 See [database/schema.sql](database/schema.sql) for the complete MySQL schema.
 
 ---
@@ -176,7 +171,7 @@ See [database/schema.sql](database/schema.sql) for the complete MySQL schema.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/mini-lms.git
+git clone https://github.com/Archi-Hassani9/mini-lms.git
 cd mini-lms
 ```
 
@@ -266,14 +261,6 @@ DB_PORT=3306
 # CORS
 CORS_ALLOWED_ORIGINS=http://localhost:5173
 
-# Cloudinary (for production)
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-# Email (SendGrid for production)
-SENDGRID_API_KEY=your_sendgrid_key
-DEFAULT_FROM_EMAIL=noreply@minilms.com
 ```
 
 ### Frontend (`frontend/.env`)
@@ -288,8 +275,6 @@ VITE_APP_NAME=Mini LMS
 ## 📚 API Documentation
 
 Full API documentation: [docs/api_documentation.md](docs/api_documentation.md)
-
-Postman Collection: [docs/postman_collection.json](docs/postman_collection.json)
 
 ### Quick Reference
 
@@ -307,11 +292,11 @@ Postman Collection: [docs/postman_collection.json](docs/postman_collection.json)
 | DELETE | /api/courses/:id/ | Admin | Delete course |
 | GET | /api/courses/:id/lessons/ | Enrolled/Admin | List lessons |
 | POST | /api/courses/:id/lessons/ | Admin | Create lesson |
-| POST | /api/enrollments/ | Student | Enroll in course |
+| POST | /api/enrollments/enroll/ | Student | Enroll in course |
 | GET | /api/enrollments/my/ | Student | My enrollments |
 | GET | /api/enrollments/ | Admin | All enrollments |
 | POST | /api/assignments/:id/submissions/ | Student | Submit assignment |
-| GET | /api/assignments/:id/submissions/ | Admin | View submissions |
+| GET | /api/assignments/:id/submissions/ | Admin | View all submissions |
 | GET | /api/analytics/admin/ | Admin | Admin dashboard data |
 | GET | /api/analytics/student/ | Student | Student dashboard data |
 
@@ -459,9 +444,8 @@ mini-lms/
 │   └── er_diagram.png                # Entity-Relationship Diagram
 │
 ├── docs/
-│   ├── api_documentation.md          # Full API reference
-│   ├── postman_collection.json        # Postman Collection v2.1
-│   └── problem_solving_answers.md    # Technical Q&A
+│   ├── ER_Mini-LMS.drawio            # ER diagram
+│   └── problem_solving_answers.txt   # Technical Q&A
 │
 └── README.md                         # This file
 ```
@@ -509,41 +493,6 @@ vercel --prod
 
 ---
 
-## 📝 Git Workflow
-
-```bash
-# Example commit history
-git init
-git add .
-git commit -m "chore: initial project setup with Django and Vite"
-
-git commit -m "feat: implement MySQL database schema with 8 tables"
-git commit -m "feat: create custom User model with role-based auth"
-git commit -m "feat: implement JWT authentication (register, login, logout)"
-git commit -m "feat: create Course CRUD API with admin permissions"
-git commit -m "feat: add Lesson management API with enrollment check"
-git commit -m "feat: implement enrollment system with duplicate prevention"
-git commit -m "feat: add assignment submission with file upload validation"
-git commit -m "feat: create analytics dashboard APIs"
-git commit -m "feat: add email notification service (SendGrid-ready)"
-git commit -m "feat: initialize React frontend with Vite and Bootstrap"
-git commit -m "feat: implement AuthContext with JWT persistence"
-git commit -m "feat: add dark mode with ThemeContext"
-git commit -m "feat: create public pages (Home, About, Courses, Contact)"
-git commit -m "feat: implement student dashboard and course learning"
-git commit -m "feat: add assignment submission page with file upload"
-git commit -m "feat: create admin dashboard with analytics charts"
-git commit -m "feat: implement FAQ chatbot with keyword matching"
-git commit -m "feat: add certificate generation with Canvas API"
-git commit -m "fix: enrollment validation duplicate check"
-git commit -m "fix: file upload MIME type validation"
-git commit -m "docs: add comprehensive README with setup instructions"
-git commit -m "chore: add deployment config (Vercel, Render, render.yaml)"
-git commit -m "feat: add seed data command with realistic sample data"
-git commit -m "test: add unit tests for authentication and enrollment"
-```
-
----
 
 ## 🔒 Security
 

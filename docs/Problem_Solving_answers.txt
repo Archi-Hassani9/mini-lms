@@ -1,0 +1,21 @@
+Answers to Questions:
+ 
+1. The LMS has 10,000 students and the course page is slow. How will you optimize it?
+To fix a slow page, I would look at the database queries first. Often, slowness is caused by the "N+1 query problem," where the backend makes a separate database request for every single lesson on the page. In Django, I would fix this using select_related and prefetch_related to fetch all the data in a single, efficient trip.
+Next, I would ensure that my MySQL database has proper indexes on columns that are frequently searched or filtered (like course_id or category). Finally, if the page is still slow, I would implement basic caching, so the server doesn't have to rebuild the entire page from scratch for every single student.
+
+2. Prevent duplicate enrollments.
+The most foolproof way to prevent this is at the database level. I would add a UNIQUE constraint in MySQL combining the student_id and course_id. This guarantees the database will literally reject a second enrollment.
+On top of that, I would add validation in the Django backend to check if an enrollment already exists before trying to save. Finally, for a good user experience on the frontend, once a student clicks "Enroll," I would disable the button or change it to "Go to Course" so they can't double-click it.
+
+3. Traffic increases from 100 to 5,000 users/day. What changes are needed?
+First, I would try Vertical Scaling—simply upgrading the hosting server (like Render) to a higher tier with more RAM and CPU to handle the immediate load.
+If traffic keeps growing, I would move to Horizontal Scaling. This means setting up multiple backend servers and putting a Load Balancer in front of them to distribute the traffic evenly. I would also move all static files (like CSS, JS, and images) to a Content Delivery Network (CDN) so they load faster and take the heavy lifting off the main server.
+
+4. Handle 200MB assignment uploads efficiently and securely.
+Uploading a massive 200MB file directly to a small Django server will likely cause it to crash or time out. Instead, I would use direct cloud storage. The backend would generate a secure, temporary link (like an AWS S3 Presigned URL), and the user's browser would upload the file directly to the cloud storage, bypassing my server completely.
+For security, I would strictly validate the file extension (only allowing .pdf, .zip, etc.) and enforce the 200MB size limit before the upload even begins.
+
+5. Recover from accidental course deletion.
+To protect against accidental deletions, I would implement Soft Deletes. Instead of running a hard DELETE SQL command that permanently erases the data, I would add a boolean column like is_deleted or a deleted_at timestamp. When an admin "deletes" a course, it just flips that flag to True, hiding it from the frontend. If it was a mistake, another admin can simply flip the flag back.
+As a backup, I would also ensure the MySQL database takes automated daily snapshots so we can restore the data if something goes catastrophically wrong.
