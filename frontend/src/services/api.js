@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://mini-lms-backend-rizu.onrender.com/api';
 
 async function apiFetch(endpoint, options = {}) {
   let token = localStorage.getItem('access_token');
